@@ -1,11 +1,11 @@
-./database/node_modules/
-./gateway/node_modules/
-./users/node_modules/
+database/node_modules/
+gateway/node_modules/
+users/node_modules/
 
-./database/database.iml
-./gateway/gateway.iml
-./users./users.iml
+database/database.iml
+gateway/gateway.iml
+users./users.iml
 
-./database/.idea/
-./gateway/.idea/
-./users/.idea/
+database/.idea/
+gateway/.idea/
+users/.idea/
