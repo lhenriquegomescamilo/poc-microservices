@@ -9,3 +9,8 @@ users./users.iml
 database/.idea/
 gateway/.idea/
 users/.idea/
+
+
+database/dist/
+gateway/dist/
+users/.dist/
