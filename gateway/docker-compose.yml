@@ -1,7 +1,25 @@
 version: '3.3'
 volumes:
   data:
+networks:
+  poc-microservice:
+    driver: bridge
 services:
+  mysql:
+    image: mysql:5.6
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    container_name: poc-microservice-mysql
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ENGLAND_IS_MY_CITY
+      - MYSQL_DATABASE=microservices
+    networks:
+      - poc-microservice
+
   gateway:
     build:
       context: .
@@ -12,11 +30,30 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-    #    depends_on:
-    #      - export
+    networks:
+      - poc-microservice
     ports:
       - 3000:3000
       - 9229:9229
+
+  database:
+    build:
+      context: ../database
+      args:
+        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+    container_name: poc-microservice-database
+    restart: always
+    volumes:
+      - ../database:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - poc-microservice
+    depends_on:
+      - mysql
+    ports:
+      - 3001:3001
+      - 9231:9229
+
   users:
     build:
       context: ../users
@@ -27,19 +64,8 @@ services:
     volumes:
       - ../users:/usr/src/app
       - /usr/src/app/node_modules
-#    depends_on:
-#      - database
+    networks:
+      - poc-microservice
     ports:
       - 3002:3002
       - 9230:9229
-
-  db:
-    image: mysql:5.6
-    ports:
-      - "3306:3306"
-    container_name: poc-microservice-mysql
-    volumes:
-      - data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=ENGLAND_IS_MY_CITY
-      - MYSQL_DATABASE=microservices

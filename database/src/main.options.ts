@@ -6,6 +6,6 @@ export const OPTIONS: NestMicroserviceOptions & MicroserviceOptions = {
     transport: Transport.TCP,
     options: {
         port: 3001,
-        host: 'localhost'
+        host: 'localhost',
     },
 };
