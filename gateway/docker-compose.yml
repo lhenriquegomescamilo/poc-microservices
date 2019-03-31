@@ -12,12 +12,26 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-#    depends_on:
-#      - export
+    #    depends_on:
+    #      - export
     ports:
       - 3000:3000
-      - 3002:3002
       - 9229:9229
+  users:
+    build:
+      context: ../users
+      args:
+        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+    container_name: poc-microservice-users
+    restart: always
+    volumes:
+      - ../users:/usr/src/app
+      - /usr/src/app/node_modules
+#    depends_on:
+#      - database
+    ports:
+      - 3002:3002
+      - 9230:9229
 
   db:
     image: mysql:5.6
