@@ -23,8 +23,6 @@ services:
   gateway:
     build:
       context: .
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
     container_name: poc-microservice-gateway
     restart: always
     volumes:
@@ -39,8 +37,6 @@ services:
   database:
     build:
       context: ../database
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
     container_name: poc-microservice-database
     restart: always
     volumes:
@@ -57,8 +53,6 @@ services:
   users:
     build:
       context: ../users
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
     container_name: poc-microservice-users
     restart: always
     volumes:
