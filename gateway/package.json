@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json",
     "build": "webpack",
+    "start-prod": "node ./dist/server.js",
     "start": "webpack --watch"
   },
   "dependencies": {
