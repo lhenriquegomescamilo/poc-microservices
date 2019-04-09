@@ -21,7 +21,7 @@ spec:
             - name: URL_MICROSERVICE_DATABASE
               value: '192.168.1.10'
             - name: MYSQL_PORT
-              value: '30001'
+              value: '32306'
             - name: MYSQL_URL
               value: '192.168.1.10'
           ports:
