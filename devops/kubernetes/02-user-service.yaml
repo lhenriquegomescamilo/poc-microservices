@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: user
+spec:
+  type: NodePort
+  selector:
+    app: user
+  ports:
+    - protocol: TCP
+      port: 3002
+      targetPort: 3002
+      nodePort: 30002
