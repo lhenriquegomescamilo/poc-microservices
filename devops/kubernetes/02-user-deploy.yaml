@@ -21,11 +21,10 @@ spec:
             - name: URL_MICROSERVICE_DATABASE
               value: '192.168.1.10'
             - name: PORT_MICROSERVICE_DATABASE
-              value: 30001
+              value: '30001'
             - name: URL_MICROSERVICE_USER
               value: '192.168.1.10'
             - name: PORT_MICROSERVICE_USER
-              value: 3002
-
+              value: '3002'
           ports:
             - containerPort: 3002
