@@ -1,29 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: database
+  name: user
   labels:
-    app: database
+    app: user
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: database
+      app: user
   template:
     metadata:
       labels:
-        app: database
+        app: user
     spec:
       containers:
-        - name: database
-          image: lcamilo/gateway_database:alpha
+        - name: user
+          image: lcamilo/gateway_users:alpha
           env:
             - name: URL_MICROSERVICE_DATABASE
               value: '192.168.1.10'
-            - name: MYSQL_PORT
+            - name: PORT_MICROSERVICE_DATABASE
               value: 30001
-            - name: MYSQL_URL
+            - name: URL_MICROSERVICE_USER
               value: '192.168.1.10'
+            - name: PORT_MICROSERVICE_USER
+              value: 3002
 
           ports:
-            - containerPort: 3001
+            - containerPort: 3002

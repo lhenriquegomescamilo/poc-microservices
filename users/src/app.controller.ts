@@ -6,7 +6,7 @@ import {UserDto} from './dto/user.dto';
 import {CreateUserDto} from './dto/create-user.dto';
 import {DATABASE_MICROSERVICE} from './configs/microservice.address';
 
-const {host, port} = DATABASE_MICROSERVICE.dev;
+const {host, port} = DATABASE_MICROSERVICE.uri;
 
 @Controller()
 export class AppController {

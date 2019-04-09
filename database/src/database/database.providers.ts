@@ -1,6 +1,8 @@
 import {Sequelize} from 'sequelize-typescript';
 import {User} from '../users/user.entity';
 
+const port = (process.env.MYSQL_PORT || 3306) as number;
+const url = (process.env.MYSQL_URL || 'localhost') as string;
 export const DatabaseProviders = [
     {
         provide: 'SequelizeToken',
@@ -9,12 +11,12 @@ export const DatabaseProviders = [
                 operatorsAliases: false,
                 dialect: 'mysql',
                 host: 'mysql',
-                port: 3306,
+                port,
                 username: 'root',
                 password: 'ENGLAND_IS_MY_CITY',
                 database: 'microservices',
-                url: process.env.MYSQL_URL
-,            });
+                url,
+            });
             sequelize.addModels([User]);
             await sequelize.sync();
             return sequelize;

@@ -1,0 +1,9 @@
+# Aplicando todos os arquivos no stating
+ls -1 | grep .yaml | while read line ; do kubectl apply -f  $line -n staging ; done
+
+
+# Removendo replicasets de uma namespace
+kubectl delete $(kubectl get replicasets  -n staging -o name) -n staging
+
+# Removendo deployments de uma namespace
+ kubectl delete $(kubectl get deployments -n staging -o name) -n staging
