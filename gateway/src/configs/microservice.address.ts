@@ -1,5 +1,6 @@
+
 export const USER_MICROSERVICE: IConfigMicroservice = {
-    hosts: {url: 'users', port: 3002},
+    hosts: {url: process.env.URL_MICROSERVICE_USER, port: (process.env.PORT_MICROSERVICE_USER || 3002) as number},
 };
 
 export interface IConfigMicroservice {

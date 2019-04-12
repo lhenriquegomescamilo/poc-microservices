@@ -5,7 +5,6 @@ import {Transport} from '@nestjs/common/enums/transport.enum';
 export const OPTIONS: NestMicroserviceOptions & MicroserviceOptions = {
     transport: Transport.TCP,
     options: {
-        port: 3001,
-        host: process.env.URL_MICROSERVICE_DATABASE || 'localhost',
+        port: (process.env.PORT_MICROSERVICE_DATABASE || 3001) as number,
     },
 };

@@ -1,30 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user
+  name: gateway
   labels:
-    app: user
+    app: gateway
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: user
+      app: gateway
   template:
     metadata:
       labels:
-        app: user
+        app: gateway
     spec:
       containers:
         - name: user
-          image: lcamilo/gateway_users:alpha
+          image: lcamilo/gateway_gateway:alpha
           env:
-            - name: URL_MICROSERVICE_DATABASE
-              value: '192.168.1.106'
-            - name: PORT_MICROSERVICE_DATABASE
-              value: '30001'
             - name: URL_MICROSERVICE_USER
               value: '192.168.1.106'
             - name: PORT_MICROSERVICE_USER
               value: '3002'
           ports:
-            - containerPort: 3002
+            - containerPort: 3000

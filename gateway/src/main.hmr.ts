@@ -7,7 +7,8 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000, () => console.log('Gateway server is listening with HMR enabled'));
+  await app
+      .listen(process.env.PORT_MICROSERVICE_GATEWAY, () => console.log('Gateway server is listening with HMR enabled'));
 
   if (module.hot) {
     module.hot.accept();

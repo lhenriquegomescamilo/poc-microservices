@@ -19,10 +19,10 @@ spec:
           image: lcamilo/gateway_database:alpha
           env:
             - name: URL_MICROSERVICE_DATABASE
-              value: '192.168.1.10'
+              value: '192.168.1.106'
             - name: MYSQL_PORT
               value: '32306'
             - name: MYSQL_URL
-              value: '192.168.1.10'
+              value: '192.168.1.106'
           ports:
             - containerPort: 3001
