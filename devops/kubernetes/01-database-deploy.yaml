@@ -16,13 +16,15 @@ spec:
     spec:
       containers:
         - name: database
-          image: lcamilo/gateway_database:alpha
+          image: lcamilo/gateway_database:0.0.1
           env:
             - name: URL_MICROSERVICE_DATABASE
               value: '192.168.1.106'
-            - name: MYSQL_PORT
-              value: '32306'
+            - name: PORT_MICROSERVICE_DATABASE
+              value: '3001'
             - name: MYSQL_URL
               value: '192.168.1.106'
+            - name: MYSQL_PORT
+              value: '32306'
           ports:
             - containerPort: 3001

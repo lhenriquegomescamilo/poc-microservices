@@ -21,6 +21,9 @@ spec:
             - name: URL_MICROSERVICE_USER
               value: '192.168.1.106'
             - name: PORT_MICROSERVICE_USER
-              value: '3002'
+              value: '30002'
+            - name: PORT_MICROSERVICE_GATEWAY
+              value: '3000'
+
           ports:
             - containerPort: 3000
