@@ -30,7 +30,7 @@ services:
       - /usr/src/app/node_modules
     environment:
       - PORT_MICROSERVICE_GATEWAY=3000
-      - URL_MICROSERVICE_USER=localhost
+      - URL_MICROSERVICE_USER=127.0.0.1
       - PORT_MICROSERVICE_USER=3002
     networks:
       - poc-microservice
@@ -48,7 +48,7 @@ services:
       - /usr/src/app/node_modules
     environment:
       - PORT_MICROSERVICE_USER=3002
-      - URL_MICROSERVICE_DATABASE=localhost
+      - URL_MICROSERVICE_DATABASE=127.0.0.1
       - PORT_MICROSERVICE_DATABASE=3001
     networks:
       - poc-microservice
@@ -67,7 +67,7 @@ services:
     environment:
       - PORT_MICROSERVICE_DATABASE=3001
       - MYSQL_PORT=3306
-      - MYSQL_PORT=localhost
+      - MYSQL_URL=mysql
     networks:
       - poc-microservice
     depends_on:

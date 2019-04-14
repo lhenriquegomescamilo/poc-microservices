@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: database
-          image: lcamilo/gateway_database:0.0.1
+          image: lcamilo/gateway_database:0.0.2
           env:
             - name: URL_MICROSERVICE_DATABASE
               value: '192.168.1.106'
