@@ -7,3 +7,6 @@ kubectl delete $(kubectl get replicasets  -n staging -o name) -n staging
 
 # Removendo deployments de uma namespace
  kubectl delete $(kubectl get deployments -n staging -o name) -n staging
+ 
+ # Comando para visualizar o join de outros slaves
+ kubeadm token create --print-join-command
