@@ -5,7 +5,7 @@ metadata:
   labels:
     app: user
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app: user
@@ -19,12 +19,14 @@ spec:
           image: lcamilo/gateway_users:0.0.2
           env:
             - name: URL_MICROSERVICE_DATABASE
-              value: '192.168.1.106'
+              valueFrom:
+                configMapKeyRef:
+                  key: URL_MICROSERVICE_DATABASE
+                  name: poc-microservice
             - name: PORT_MICROSERVICE_DATABASE
-              value: '30001'
-            - name: URL_MICROSERVICE_USER
-              value: '192.168.1.106'
-            - name: PORT_MICROSERVICE_USER
-              value: '3002'
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT_MICROSERVICE_DATABASE
+                  name: poc-microservice
           ports:
             - containerPort: 3002
