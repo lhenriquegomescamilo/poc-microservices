@@ -1,0 +1,7 @@
+image:
+  tag: 0.0.2
+container:
+  port: 3001
+service:
+  nodePort: 30001
+replicas: 2
