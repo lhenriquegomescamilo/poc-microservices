@@ -23,29 +23,51 @@ services:
   gateway:
     build:
       context: .
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
     container_name: poc-microservice-gateway
     restart: always
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+      - PORT_MICROSERVICE_GATEWAY=3000
+      - URL_MICROSERVICE_USER=127.0.0.1
+      - PORT_MICROSERVICE_USER=3002
     networks:
       - poc-microservice
     ports:
       - 3000:3000
       - 9229:9229
 
+  users:
+    build:
+      context: ../users
+    container_name: poc-microservice-users
+    restart: always
+    volumes:
+      - ../users:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT_MICROSERVICE_USER=3002
+      - URL_MICROSERVICE_DATABASE=127.0.0.1
+      - PORT_MICROSERVICE_DATABASE=3001
+    networks:
+      - poc-microservice
+    ports:
+      - 3002:3002
+      - 9230:9229
+
   database:
     build:
       context: ../database
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
     container_name: poc-microservice-database
     restart: always
     volumes:
       - ../database:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+      - PORT_MICROSERVICE_DATABASE=3001
+      - MYSQL_PORT=3306
+      - MYSQL_URL=mysql
     networks:
       - poc-microservice
     depends_on:
@@ -54,18 +76,4 @@ services:
       - 3001:3001
       - 9231:9229
 
-  users:
-    build:
-      context: ../users
-      args:
-        - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
-    container_name: poc-microservice-users
-    restart: always
-    volumes:
-      - ../users:/usr/src/app
-      - /usr/src/app/node_modules
-    networks:
-      - poc-microservice
-    ports:
-      - 3002:3002
-      - 9230:9229
+

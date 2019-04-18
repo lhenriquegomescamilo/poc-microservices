@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: poc-microservice
+  namespace: production
+data:
+  URL_MICROSERVICE_USER: '10.0.0.4'
+  PORT_MICROSERVICE_USER: '30002'
+  URL_MICROSERVICE_DATABASE: '10.0.0.4'
+  PORT_MICROSERVICE_DATABASE: '30001'
+  PORT_MICROSERVICE_GATEWAY: '3000'
+  MYSQL_URL: '10.0.0.4'
+  MYSQL_PORT: '32306'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: poc-microservice
+  namespace: staging
+data:
+  URL_MICROSERVICE_USER: '10.0.0.4'
+  PORT_MICROSERVICE_USER: '30002'
+  URL_MICROSERVICE_DATABASE: '10.0.0.4'
+  PORT_MICROSERVICE_DATABASE: '30001'
+  PORT_MICROSERVICE_GATEWAY: '3000'
+  MYSQL_URL: '10.0.0.4'
+  MYSQL_PORT: '32306'
+---

@@ -1,11 +1,8 @@
-export const DATABASE_MICROSERVICE: IConfigMicroservice = {
-    dev: {host: 'database', port: 3001},
-};
+const host = (process.env.URL_MICROSERVICE_DATABASE || 'localhost') as string;
+const port = (process.env.PORT_MICROSERVICE_DATABASE || 3001) as number;
+
+export const DATABASE_MICROSERVICE: IConfigMicroservice = ({uri: {host, port}});
 
 export interface IConfigMicroservice {
-    test?: { host: string, port: number };
-    dev?: { host: string, port: number };
-    hom?: { host: string, port: number };
-    prehom?: { host: string, port: number };
-    prod?: { host: string, port: number };
+    uri?: { host: string, port: number };
 }

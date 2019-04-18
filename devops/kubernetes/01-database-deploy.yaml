@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: database
+          image: lcamilo/gateway_database:0.0.2
+          env:
+            - name: URL_MICROSERVICE_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: URL_MICROSERVICE_DATABASE
+                  name: poc-microservice
+            - name: MYSQL_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: MYSQL_URL
+                  name: poc-microservice
+            - name: MYSQL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: MYSQL_PORT
+                  name: poc-microservice
+          ports:
+            - containerPort: 3001
