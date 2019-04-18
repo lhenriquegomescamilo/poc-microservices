@@ -14,4 +14,3 @@ kubectl delete $(kubectl get replicasets  -n staging -o name) -n staging
 
 # Removendo services, deployments, pods e recriando
 kubectl delete $(kubectl get deployments -n staging -o name) -n staging && kubectl delete $(kubectl get services -o name -n staging) -n staging && kubectl delete  $(kubectl get cm -n staging -o name) -n staging && ls -1 | grep .yaml | while read line ; do kubectl apply -f  $line -n staging ; done
-

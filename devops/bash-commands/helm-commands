@@ -1,0 +1,7 @@
+# Instalação do helm
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+
+# Inicializando o helm
+helm init
+# Aplicando todos os arquivos yaml
+ls -1 | grep .yaml | while read line ; do kubectl apply -f  $line -n staging ; done
