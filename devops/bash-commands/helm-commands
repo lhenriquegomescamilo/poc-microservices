@@ -3,5 +3,16 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
 
 # Inicializando o helm
 helm init
+
 # Aplicando todos os arquivos yaml
 ls -1 | grep .yaml | while read line ; do kubectl apply -f  $line -n staging ; done
+
+# Aplicando todas configuracao de serivce account e cluster role
+kubectl apply -f tiller-all-config.yaml
+
+# Criando patch com service account
+kubectl patch deployment tiller-deploy -n kube-system  --patch "$(cat tiller-patch.yaml)"
+
+
+# Também é possível inicilar o tiller com o service account
+helm init --service-account tiller
