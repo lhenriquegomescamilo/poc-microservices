@@ -24,3 +24,20 @@ helm install --namespace staging --name mysql ./mysql && helm install --namespac
 
 # Criando chart pelo helm
 helm create mysql
+
+
+# Criando o nosso repositorório de charts
+helm install --name helm --namespace devops -f nome_do_arquivo.yaml
+
+# Adicionando o repositório (Obs: cuidado com a barra invertida)
+helm repo add poc-microservice http://$(kubectl get nodes --namespace devops -o jsonpath="{.items[0].status.addresses[0].address}"):30010
+
+
+
+# Plugin para auxiliar a instalação o upload dos charts
+helm plugin install https://github.com/chartmuseum/helm-push
+
+
+# comando para subir para o repositório charts instalados
+
+helm lint mysql && helm push mysql/ poc-microservice && helm lint database && helm push database/ poc-microservice && helm lint users && helm push users/ poc-microservice && helm lint gateway && helm push gateway/ poc-microservice
