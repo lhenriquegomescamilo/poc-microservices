@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: {{ include "mysql.fullname" . }}
+    name: {{ include "database.fullname" . }}
     namespace: {{.Values.metadata.namepsace}}
     labels:
-        app.kubernetes.io/name: {{ include "mysql.name" . }}
-        helm.sh/chart: {{ include "mysql.chart" . }}
+        app.kubernetes.io/name: {{ include "database.name" . }}
+        helm.sh/chart: {{ include "database.chart" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
     replicas: {{ .Values.replicaCount }}
     selector:
         matchLabels:
-            app.kubernetes.io/name: {{ include "mysql.name" . }}
+            app.kubernetes.io/name: {{ include "database.name" . }}
             app.kubernetes.io/instance: {{ .Release.Name }}
     template:
         metadata:
             labels:
-                app.kubernetes.io/name: {{ include "mysql.name" . }}
+                app.kubernetes.io/name: {{ include "database.name" . }}
                 app.kubernetes.io/instance: {{ .Release.Name }}
         spec:
             containers:
@@ -25,10 +25,21 @@ spec:
                   image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
                   imagePullPolicy: {{ .Values.image.pullPolicy }}
                   env:
-                      - name: MYSQL_ROOT_PASSWORD
-                        value: ENGLAND_IS_MY_CITY
-                      - name: MYSQL_DATABASE
-                        value: microservices
+                      - name: URL_MICROSERVICE_DATABASE
+                        valueFrom:
+                            configMapKeyRef:
+                                key: URL_MICROSERVICE_DATABASE
+                                name: poc-microservice
+                      - name: MYSQL_URL
+                        valueFrom:
+                            configMapKeyRef:
+                                key: MYSQL_URL
+                                name: poc-microservice
+                      - name: MYSQL_PORT
+                        valueFrom:
+                            configMapKeyRef:
+                                key: MYSQL_PORT
+                                name: poc-microservice
                   ports:
                       - name: http
                         containerPort: {{.Values.service.port}}
