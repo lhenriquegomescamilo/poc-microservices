@@ -1,0 +1,9 @@
+image:
+  tag: 0.0.2
+container:
+  port: 3002
+service:
+  nodePort: 30002
+replicas: 10
+metadata:
+  namespace: staging
