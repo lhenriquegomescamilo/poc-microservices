@@ -26,7 +26,7 @@ helm install --namespace staging --name mysql ./mysql && helm install --namespac
 helm create mysql
 
 
-# Criando o nosso repositorório de charts
+# Criando o nosso repositório de charts
 helm install --name helm --namespace devops -f nome_do_arquivo.yaml
 
 # Adicionando o repositório (Obs: cuidado com a barra invertida)
@@ -39,5 +39,14 @@ helm plugin install https://github.com/chartmuseum/helm-push
 
 
 # comando para subir para o repositório charts instalados
-
 helm lint mysql && helm push mysql/ poc-microservice && helm lint database && helm push database/ poc-microservice && helm lint users && helm push users/ poc-microservice && helm lint gateway && helm push gateway/ poc-microservice
+
+
+# Instalando de um repositório (no caso o local)
+helm install poc-microservice/mysql --namespace staging --name mysql && helm install poc-microservice/database --namespace staging --name database && helm install poc-microservice/users --namespace=staging --name users && helm install poc-microservice/gateway --namespace staging --name gateway
+
+# Atualizando com base em uma imagem
+helm upgrade gateway poc-microservice/gateway --set image.tag=0.0.3
+
+# Retornando uma versão do helm
+helm rollback gateway 2
