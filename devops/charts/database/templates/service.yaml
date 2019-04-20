@@ -1,13 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: database
+    name: database
+    namespace: {{.Values.metadata.namespace}}
 spec:
-  type: NodePort
-  selector:
-    app: database
-  ports:
-    - protocol: TCP
-      port: {{ .Values.container.port }}
-      targetPort: {{ .Values.container.port }}
-      nodePort: {{ .Values.service.nodePort }}
+    type: NodePort
+    selector:
+        app: database
+    ports:
+        - protocol: TCP
+          port: {{ .Values.container.port }}
+          targetPort: {{ .Values.container.port }}
+          nodePort: {{ .Values.service.nodePort }}
