@@ -20,3 +20,7 @@ helm init --service-account tiller
 
 # Instalando todos charts
 helm install --namespace staging --name mysql ./mysql && helm install --namespace staging --name database ./database && helm install --namespace staging --name users ./users && helm install --namespace staging --name gateway ./gateway
+
+
+# Criando chart pelo helm
+helm create mysql
