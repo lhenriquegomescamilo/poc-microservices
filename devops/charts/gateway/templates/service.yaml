@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: gateway
+    namespace: {{.Values.metadata.namespace}}
+spec:
+    type: NodePort
+    selector:
+        app: gateway
+    ports:
+        - protocol: TCP
+          port: {{.Values.container.port}}
+          targetPort: {{.Values.container.port}}
+          nodePort: {{.Values.service.nodePort}}

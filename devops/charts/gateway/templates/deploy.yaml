@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gateway
+    namespace: {{.Values.metadata.namespace}}
+    labels:
+        app: gateway
+spec:
+    replicas: {{.Values.replicas}}
+    selector:
+        matchLabels:
+            app: gateway
+    template:
+        metadata:
+            labels:
+                app: gateway
+        spec:
+            containers:
+                - name: user
+                  image: lcamilo/gateway_gateway:{{.Values.image.tag}}
+                  env:
+                      - name: PORT_MICROSERVICE_GATEWAY
+                        valueFrom:
+                            configMapKeyRef:
+                                key: PORT_MICROSERVICE_GATEWAY
+                                name: poc-microservice
+                      - name: URL_MICROSERVICE_USER
+                        valueFrom:
+                            configMapKeyRef:
+                                key: URL_MICROSERVICE_USER
+                                name: poc-microservice
+                      - name: PORT_MICROSERVICE_USER
+                        valueFrom:
+                            configMapKeyRef:
+                                key: PORT_MICROSERVICE_USER
+                                name: poc-microservice
+                  ports:
+                      - containerPort: {{.Values.container.port}}
