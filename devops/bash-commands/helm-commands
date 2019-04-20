@@ -16,3 +16,7 @@ kubectl patch deployment tiller-deploy -n kube-system  --patch "$(cat tiller-pat
 
 # Também é possível inicilar o tiller com o service account
 helm init --service-account tiller
+
+
+# Instalando todos charts
+helm install --namespace staging --name mysql ./mysql && helm install --namespace staging --name database ./database && helm install --namespace staging --name users ./users && helm install --namespace staging --name gateway ./gateway
