@@ -1,6 +1,6 @@
 {
   "name": "microservice-database",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {

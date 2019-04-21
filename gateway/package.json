@@ -1,6 +1,6 @@
 {
   "name": "microservice-gateway",
-  "version": "1.0.0",
+  "version": "0.0.4",
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
