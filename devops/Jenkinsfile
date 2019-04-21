@@ -8,13 +8,22 @@ podTemplate(
         node('poc-microservices') {
             stage('Checkout') {
                 echo 'Iniciando clone do repositorio'
-                sh "docker images"
                 sh "ls -ltra"
             }
 
             stage('Build') {
                 echo 'Building com npm repositorio'
                 sh "ls -ltra"
+            }
+
+            stage('Package') {
+                // This step should not normally be used in your script. Consult the inline help for details.
+                container('docker-container') {
+                    echo 'Building com npm repositorio'
+                    sh "docker images"
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'database']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'git@github.com:lhenriquegomescamilo/poc-microservices.git']]])
+                    sh "ls -ltra"
+                }
             }
 
             stage('Deploy') {
