@@ -16,7 +16,7 @@ podTemplate(
         def MICROSERVICE_NAME = "database"
 
         def REPO_HELM_NAME = "poc-microservice"
-        def HELM_SERVICE_URL = "http://helm-chartmuseum:8080"
+        def HELM_SERVICE_CHARMUSEUM_URL = "http://helm-chartmuseum:8080"
 
         stage('Checkout') {
             echo 'Iniciando clone do Repositorio'
@@ -41,7 +41,7 @@ podTemplate(
             container('helm-container') {
                 echo 'Deploy com helm'
                 sh "helm init --client-only"
-                sh "helm repo add ${REPO_HELM_NAME} ${HELM_SERVICE_URL}"
+                sh "helm repo add ${REPO_HELM_NAME} ${HELM_SERVICE_CHARMUSEUM_URL}"
                 sh "helm repo update"
                 sh "helm repo list"
                 sh "helm search ${REPO_HELM_NAME}"
