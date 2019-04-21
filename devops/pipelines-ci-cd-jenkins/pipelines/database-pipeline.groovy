@@ -10,6 +10,7 @@ podTemplate(
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
     node('poc-microservices') {
         def REPOSITORY
+        def GIR_URL_REPOSITORY = 'git@github.com:lhenriquegomescamilo/poc-microservices.git'
         def DOCKER_IMAGE = "gateway_database"
         def DOCKER_IMAGE_VERSION = "gateway_database"
         def MICROSERVICE_NAME = "database"
@@ -19,7 +20,7 @@ podTemplate(
 
         stage('Checkout') {
             echo 'Iniciando clone do Repositorio'
-            REPOSITORY = git credentialsId: 'github', url: 'git@github.com:lhenriquegomescamilo/poc-microservices.git'
+            REPOSITORY = git credentialsId: 'github', url: GIR_URL_REPOSITORY
             echo REPOSITORY.toString()
             sh "ls -ltra ./database"
         }
