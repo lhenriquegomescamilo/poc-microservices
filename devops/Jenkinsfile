@@ -1,0 +1,25 @@
+// This step should not normally be used in your script. Consult the inline help for details.
+podTemplate(
+    label: 'poc-microservices',
+    namespace: 'devops',
+    name: 'poc-microservices',
+    containers: [containerTemplate( alwaysPullImage: true, args: 'cat', command: '/bin/sh -c', envVars: [], image: 'docker', livenessProbe: containerLivenessProbe( execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0 ), name: 'docker-container', ports: [], privileged: false, resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', shell: null, ttyEnabled: true, workingDir: '/home/jenkins' )],
+    volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
+        node('poc-microservices') {
+            stage('Checkout') {
+                echo 'Iniciando clone do repositorio'
+                sh "docker images"
+                sh "ls -ltra"
+            }
+
+            stage('Build') {
+                echo 'Building com npm repositorio'
+                sh "ls -ltra"
+            }
+
+            stage('Deploy') {
+                echo 'Deploy com helm'
+                sh "ls -ltra"
+            }
+        } // end of node
+}
